@@ -141,8 +141,8 @@ func sdGetMetadata(data string) (response SD_Metadata, err error) {
 	if err != nil {
 		return
 	}
-
-	json.Unmarshal(body.([]byte), &response)
+	json.NewDecoder(body.(io.Reader)).Decode(&response)
+	//json.Unmarshal(body.([]byte), &response)
 
 	return
 }
@@ -227,12 +227,14 @@ func postDataFromSD(data, reqType string) (body interface{}, err error) {
 
 	}
 
-	defer resp.Body.Close()
+	//defer resp.Body.Close()
 
 	switch reqType {
 
 	case "programs":
-		body = resp
+		body = resp.Body
+		return
+	case "metadata":
 		return
 	}
 
@@ -243,8 +245,6 @@ func postDataFromSD(data, reqType string) (body interface{}, err error) {
 	case "headends":
 		return
 	case "schedules":
-		return
-	case "metadata":
 		return
 	}
 
