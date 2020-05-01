@@ -238,12 +238,17 @@ func postDataFromSD(data, reqType string) (body interface{}, err error) {
 		return
 	case "schedules":
 		return
-	case "headends":
-		return
 	}
 
 	body, _ = ioutil.ReadAll(resp.Body)
-	
+
+	switch reqType {
+
+	case "headends":
+		return
+
+	}
+
 	var response SD_Status
 	err = json.Unmarshal(body.([]byte), &response)
 
