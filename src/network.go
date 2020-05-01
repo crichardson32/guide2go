@@ -235,8 +235,10 @@ func postDataFromSD(data, reqType string) (body interface{}, err error) {
 		body = resp.Body
 		return
 	case "metadata":
+		body = resp.Body
 		return
 	case "schedules":
+		body = resp.Body
 		return
 	}
 
