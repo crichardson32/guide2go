@@ -69,8 +69,8 @@ func sdHeadends(lineup string) (response SD_Headends, err error) {
 	if err != nil {
 		return
 	}
-
-	json.Unmarshal(body.([]byte), &response)
+	json.NewDecoder(body.(io.Reader)).Decode(&response)
+	//json.Unmarshal(body.([]byte), &response)
 
 	return
 }
@@ -109,8 +109,8 @@ func sdGetSchedules(data string) (response SD_Schedules, err error) {
 	if err != nil {
 		return
 	}
-
-	json.Unmarshal(body.([]byte), &response)
+	json.NewDecoder(body.(io.Reader)).Decode(&response)
+	//json.Unmarshal(body.([]byte), &response)
 
 	return
 }
@@ -236,18 +236,14 @@ func postDataFromSD(data, reqType string) (body interface{}, err error) {
 		return
 	case "metadata":
 		return
+	case "schedules":
+		return
+	case "headends":
+		return
 	}
 
 	body, _ = ioutil.ReadAll(resp.Body)
-
-	switch reqType {
-
-	case "headends":
-		return
-	case "schedules":
-		return
-	}
-
+	
 	var response SD_Status
 	err = json.Unmarshal(body.([]byte), &response)
 
