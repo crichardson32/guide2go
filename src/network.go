@@ -70,7 +70,6 @@ func sdHeadends(lineup string) (response SD_Headends, err error) {
 		return
 	}
 	json.NewDecoder(body.(io.Reader)).Decode(&response)
-	//json.Unmarshal(body.([]byte), &response)
 
 	return
 }
@@ -110,7 +109,6 @@ func sdGetSchedules(data string) (response SD_Schedules, err error) {
 		return
 	}
 	json.NewDecoder(body.(io.Reader)).Decode(&response)
-	//json.Unmarshal(body.([]byte), &response)
 
 	return
 }
@@ -129,7 +127,6 @@ func sdGetPrograms(data string) (response SD_Programs, err error) {
 		return
 	}
 	json.NewDecoder(newBody).Decode(&response)
-	//json.Unmarshal(body.([]byte), &response)
 
 	return
 }
@@ -142,7 +139,6 @@ func sdGetMetadata(data string) (response SD_Metadata, err error) {
 		return
 	}
 	json.NewDecoder(body.(io.Reader)).Decode(&response)
-	//json.Unmarshal(body.([]byte), &response)
 
 	return
 }
@@ -226,8 +222,6 @@ func postDataFromSD(data, reqType string) (body interface{}, err error) {
 		return
 
 	}
-
-	//defer resp.Body.Close()
 
 	switch reqType {
 

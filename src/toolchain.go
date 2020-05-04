@@ -130,21 +130,9 @@ func writeByteToFile(file string, data []byte) error {
 
 func gUnzipData(data io.Reader) (res io.Reader, err error) {
 
-	//b := bytes.NewBuffer(data)
-
-	//var res io.Reader
 	res, err = gzip.NewReader(data)
 	if err != nil {
 		return
 	}
-/*
-//	var resB bytes.Buffer
-	_, err = resB.ReadFrom(r)
-	if err != nil {
-		return
-	}
-
-	res = resB.Bytes()
-*/
 	return
 }
